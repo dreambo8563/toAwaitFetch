@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const tabs = [
   { id: 'basic', label: '基础用法', icon: 'code' },
@@ -56,78 +56,79 @@ export default function Configuration() {
              
              <div className="min-h-[300px] bg-surface-dark/90 rounded-xl p-6 border border-white/5 overflow-hidden font-mono text-sm leading-relaxed">
                 {activeTab === 'basic' && (
-                  <>
-                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/user/1'</span>);
-                    <br/><span className="text-purple-400">if</span> (data) {'{'}
-                    <br/>&nbsp;&nbsp;<span className="text-gray-500">// Request succeeded</span>
-                    <br/>&nbsp;&nbsp;console.<span className="text-sky-300">log</span>(data);
-                    <br/>{'}'} <span className="text-purple-400">else</span> {'{'}
-                    <br/>&nbsp;&nbsp;<span className="text-gray-500">// Request failed</span>
-                    <br/>&nbsp;&nbsp;console.<span className="text-sky-300">error</span>(error);
-                    <br/>{'}'}
-                  </>
+                  <pre className="whitespace-pre">
+                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch{'\n'}
+                    {'  '}.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/user/1'</span>);{'\n'}
+                    {'\n'}
+                    <span className="text-purple-400">if</span> (data) {'{'}{'\n'}
+                    {'  '}<span className="text-gray-500">// Request succeeded</span>{'\n'}
+                    {'  '}console.<span className="text-sky-300">log</span>(data);{'\n'}
+                    {'}'} <span className="text-purple-400">else</span> {'{'}{'\n'}
+                    {'  '}<span className="text-gray-500">// Request failed</span>{'\n'}
+                    {'  '}console.<span className="text-sky-300">error</span>(error);{'\n'}
+                    {'}'}
+                  </pre>
                 )}
                 {activeTab === 'headers' && (
-                  <>
-                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">create</span>({'{'}
-                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2 block my-1">
-                      <span className="text-cyan-300">headers</span>: {'{'}
-                      <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">'X-API-KEY'</span>: <span className="text-amber-300">'YOUR_KEY'</span>,
-                      <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">'Content-Type'</span>: <span className="text-amber-300">'application/json'</span>
-                      <br/>&nbsp;&nbsp;&nbsp;&nbsp;{'}'}
-                    </span>
-                    &nbsp;&nbsp;{'}'})
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">sendPost</span>(<span className="text-amber-300">'/users'</span>, {'{'} <span className="text-cyan-300">name</span>: <span className="text-amber-300">'Alice'</span> {'}'});
-                  </>
+                  <pre className="whitespace-pre">
+                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch{'\n'}
+                    {'  '}.<span className="text-sky-300">create</span>({'{'}{'\n'}
+                    {'    '}<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2">
+                      <span className="text-cyan-300">headers</span>: {'{'}{'\n'}
+                      {'      '}<span className="text-green-400">'X-API-KEY'</span>: <span className="text-amber-300">'YOUR_KEY'</span>,{'\n'}
+                      {'      '}<span className="text-green-400">'Content-Type'</span>: <span className="text-amber-300">'application/json'</span>{'\n'}
+                      {'    '}{'}'}
+                    </span>{'\n'}
+                    {'  '}{'}'}).{'\n'}
+                    {'  '}.<span className="text-sky-300">sendPost</span>(<span className="text-amber-300">'/users'</span>, {'{'} <span className="text-cyan-300">name</span>: <span className="text-amber-300">'Alice'</span> {'}'});
+                  </pre>
                 )}
                 {activeTab === 'retry' && (
-                   <>
-                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">create</span>({'{'}
-                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2 block my-1">
-                      <span className="text-cyan-300">retry</span>: {'{'}
-                      <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-cyan-300">retries</span>: <span className="text-teal-300">1</span>,
-                      <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-cyan-300">delay</span>: <span className="text-teal-300">1000</span>
-                      <br/>&nbsp;&nbsp;&nbsp;&nbsp;{'}'}
-                    </span>
-                    &nbsp;&nbsp;{'}'})
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/flaky'</span>);
-                   </>
+                  <pre className="whitespace-pre">
+                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch{'\n'}
+                    {'  '}.<span className="text-sky-300">create</span>({'{'}{'\n'}
+                    {'    '}<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2">
+                      <span className="text-cyan-300">retry</span>: {'{'}{'\n'}
+                      {'      '}<span className="text-cyan-300">retries</span>: <span className="text-teal-300">1</span>,{'\n'}
+                      {'      '}<span className="text-cyan-300">delay</span>: <span className="text-teal-300">1000</span>{'\n'}
+                      {'    '}{'}'}
+                    </span>{'\n'}
+                    {'  '}{'}'}).{'\n'}
+                    {'  '}.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/flaky'</span>);
+                  </pre>
                 )}
                 {activeTab === 'status' && (
-                   <>
-                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">create</span>({'{'}
-                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2 block my-1">
-                       <span className="text-cyan-300">validateStatus</span>: (<span className="text-orange-300">s</span>) =&gt; <span className="text-orange-300">s</span> &gt;= <span className="text-teal-300">200</span> &amp;&amp; <span className="text-orange-300">s</span> &lt; <span className="text-teal-300">400</span>
-                    </span>
-                    &nbsp;&nbsp;{'}'})
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/resource'</span>);
-                   </>
+                  <pre className="whitespace-pre">
+                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch{'\n'}
+                    {'  '}.<span className="text-sky-300">create</span>({'{'}{'\n'}
+                    {'    '}<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2">
+                      <span className="text-cyan-300">validateStatus</span>: (<span className="text-orange-300">s</span>) =&gt; <span className="text-orange-300">s</span> &gt;= <span className="text-teal-300">200</span> &amp;&amp; <span className="text-orange-300">s</span> &lt; <span className="text-teal-300">400</span>
+                    </span>{'\n'}
+                    {'  '}{'}'}).{'\n'}
+                    {'  '}.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/resource'</span>);
+                  </pre>
                 )}
                 {activeTab === 'response' && (
-                  <>
-                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">create</span>({'{'}
-                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2 block my-1">
-                       <span className="text-cyan-300">validateResponse</span>: (<span className="text-orange-300">res</span>) =&gt; <span className="text-orange-300">res</span>.<span className="text-cyan-300">code</span> === <span className="text-teal-300">0</span>
-                    </span>
-                    &nbsp;&nbsp;{'}'})
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/data'</span>);
-                  </>
+                  <pre className="whitespace-pre">
+                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch{'\n'}
+                    {'  '}.<span className="text-sky-300">create</span>({'{'}{'\n'}
+                    {'    '}<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2">
+                      <span className="text-cyan-300">validateResponse</span>: (<span className="text-orange-300">res</span>) =&gt; <span className="text-orange-300">res</span>.<span className="text-cyan-300">code</span> === <span className="text-teal-300">0</span>
+                    </span>{'\n'}
+                    {'  '}{'}'}).{'\n'}
+                    {'  '}.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/data'</span>);
+                  </pre>
                 )}
                 {activeTab === 'transform' && (
-                  <>
-                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">create</span>({'{'}
-                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2 block my-1">
-                       <span className="text-cyan-300">transformResponse</span>: (<span className="text-orange-300">res</span>) =&gt; <span className="text-orange-300">res</span>.<span className="text-cyan-300">data</span>.<span className="text-cyan-300">user</span>
-                    </span>
-                    &nbsp;&nbsp;{'}'})
-                    <br/>&nbsp;&nbsp;.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/user'</span>);
-                  </>
+                  <pre className="whitespace-pre">
+                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch{'\n'}
+                    {'  '}.<span className="text-sky-300">create</span>({'{'}{'\n'}
+                    {'    '}<span className="bg-blue-500/20 border-l-2 border-blue-500 pl-2">
+                      <span className="text-cyan-300">transformResponse</span>: (<span className="text-orange-300">res</span>) =&gt; <span className="text-orange-300">res</span>.<span className="text-cyan-300">data</span>.<span className="text-cyan-300">user</span>
+                    </span>{'\n'}
+                    {'  '}{'}'}).{'\n'}
+                    {'  '}.<span className="text-sky-300">sendGet</span>(<span className="text-amber-300">'/api/user'</span>);
+                  </pre>
                 )}
              </div>
           </div>
@@ -233,7 +234,7 @@ export default function Configuration() {
                      <div className="text-xs text-slate-400 mb-2">Server Response (HTTP 200)</div>
                      
                      <div className="relative w-full bg-slate-800 p-3 rounded border border-white/5 font-mono text-xs text-slate-300">
-                        <div className="absolute -left-2 top-1/2 -translate-y-1/2 bg-green-500 rounded-full p-1 text-white shadow-lg"><span className="material-symbols-outlined text-sm block">task_alt</span></div>
+                        <div className="absolute -left-2 top-1/2 -translate-y-1/2 bg-green-500 rounded-full p-1 text-white shadow-lg"><span className="material-symbols-outlined text-sm/[1] block">task_alt</span></div>
                         <pre>
 {`{
   "code": `}<span className="bg-blue-500/20 text-blue-300 px-1">0</span>{`,
@@ -245,7 +246,7 @@ export default function Configuration() {
                      <div className="text-green-400 text-xs font-bold">✔ Business Logic Success</div>
 
                      <div className="relative w-full bg-slate-800 p-3 rounded border border-white/5 font-mono text-xs text-slate-300 mt-2">
-                        <div className="absolute -left-2 top-1/2 -translate-y-1/2 bg-red-500 rounded-full p-1 text-white shadow-lg"><span className="material-symbols-outlined text-sm block">error</span></div>
+                        <div className="absolute -left-2 top-1/2 -translate-y-1/2 bg-red-500 rounded-full p-1 text-white shadow-lg"><span className="material-symbols-outlined text-sm/[1] block">error</span></div>
                         <pre>
 {`{
   "code": `}<span className="bg-red-500/20 text-red-300 px-1">1001</span>{`,

@@ -167,48 +167,43 @@ export default function ErrorHandling() {
                   <button className="text-primary text-sm font-bold border-b-2 border-primary py-1">代码示例</button>
                </div>
                <div className="p-6 bg-black/50 font-mono text-sm leading-relaxed overflow-x-auto">
-<pre>
-<code className="block text-slate-300">
-<span className="text-slate-500">// 场景: {selectedScenario.label}</span>
-<span className="text-purple-400">async function</span> <span className="text-yellow-300">fetchData</span>() {'{'}
-  
-{methodId === 'destructure' && (
-<>
-  <span className="text-slate-500">// 解构 error 会自动抑制异常抛出</span>
-  <span className="bg-primary/20 block -mx-2 px-2 py-1"><span className="text-purple-400">const</span> [ data, error ] = <span className="text-purple-400">await</span> toAwaitFetch(url);</span>
-  <span className="text-purple-400">if</span> (error) {'{'}
-    console.log(<span className="text-green-400">'请求失败, 但未抛出异常'</span>, error);
-    <span className="text-purple-400">return</span>;
-  {'}'}
-</>
-)}
-
-{methodId === 'none' && (
-<>
-  <span className="text-slate-500">// 默认模式：未捕获，将抛出异常</span>
-  <span className="bg-red-500/20 block -mx-2 px-2 py-1"><span className="text-purple-400">await</span> toAwaitFetch(url);</span>
-  <span className="text-slate-500">// 代码将在此处中断，进入 Promise.reject</span>
-</>
-)}
-
-{methodId === 'catch' && (
-<>
-  <span className="text-slate-500">// 链式 catch 捕获异常</span>
-  <span className="bg-primary/20 block -mx-2 px-2 py-1"><span className="text-purple-400">await</span> toAwaitFetch(url).<span className="text-sky-300">catch</span>(err =&gt; {'{'} ... {'}'});</span>
-</>
-)}
-
-{methodId === 'suppress' && (
-<>
-  <span className="text-slate-500">// 全局配置了 suppressError</span>
-  <span className="bg-primary/20 block -mx-2 px-2 py-1"><span className="text-purple-400">await</span> toAwaitFetch(url);</span>
-  <span className="text-slate-500">// 异常被全局钩子拦截，不会在此处抛出</span>
-</>
-)}
-
-{'}'}
-</code>
-</pre>
+                 <pre>
+                   <code className="block text-slate-300 whitespace-pre">
+                     <span className="text-slate-500">// 场景: {selectedScenario.label}</span>{'\n'}
+                     <span className="text-purple-400">async function</span> <span className="text-yellow-300">fetchData</span>() {'{'}{'\n'}
+                     {methodId === 'destructure' && (
+                       <>
+                         {'  '}<span className="text-slate-500">// 解构 error 会自动抑制异常抛出</span>{'\n'}
+                         {'  '}<span className="bg-primary/20 px-1"><span className="text-purple-400">const</span> [ data, error ] = <span className="text-purple-400">await</span> toAwaitFetch(url);</span>{'\n'}
+                         {'  '}<span className="text-purple-400">if</span> (error) {'{'}{'\n'}
+                         {'    '}console.log(<span className="text-green-400">'请求失败, 但未抛出异常'</span>, error);{'\n'}
+                         {'    '}<span className="text-purple-400">return</span>;{'\n'}
+                         {'  '}{'}'}{'\n'}
+                       </>
+                     )}
+                     {methodId === 'none' && (
+                       <>
+                         {'  '}<span className="text-slate-500">// 默认模式：未捕获，将抛出异常</span>{'\n'}
+                         {'  '}<span className="bg-red-500/20 px-1"><span className="text-purple-400">await</span> toAwaitFetch(url);</span>{'\n'}
+                         {'  '}<span className="text-slate-500">// 代码将在此处中断，进入 Promise.reject</span>{'\n'}
+                       </>
+                     )}
+                     {methodId === 'catch' && (
+                       <>
+                         {'  '}<span className="text-slate-500">// 链式 catch 捕获异常</span>{'\n'}
+                         {'  '}<span className="bg-primary/20 px-1"><span className="text-purple-400">await</span> toAwaitFetch(url).<span className="text-sky-300">catch</span>(err =&gt; {'{'} ... {'}'});</span>{'\n'}
+                       </>
+                     )}
+                     {methodId === 'suppress' && (
+                       <>
+                         {'  '}<span className="text-slate-500">// 全局配置了 suppressError</span>{'\n'}
+                         {'  '}<span className="bg-primary/20 px-1"><span className="text-purple-400">await</span> toAwaitFetch(url);</span>{'\n'}
+                         {'  '}<span className="text-slate-500">// 异常被全局钩子拦截，不会在此处抛出</span>{'\n'}
+                       </>
+                     )}
+                     {'}'}
+                   </code>
+                 </pre>
                </div>
             </div>
           </div>

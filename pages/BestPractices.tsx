@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const SimResult = ({ step, text, icon, color }: { step: number; text: string; icon: string; color: string }) => (
   <div className="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-500">
@@ -38,44 +38,42 @@ export default function BestPractices() {
            <div className="bg-surface-dark border border-white/10 rounded-xl overflow-hidden shadow-2xl">
              <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-xs text-slate-400 font-mono">src/utils/http.ts</div>
              <div className="p-6 overflow-x-auto">
-               <pre className="font-mono text-sm leading-relaxed text-slate-300">
-<code className="block">
-<span className="text-purple-400">import</span> {'{ createToAwaitFetch }'} <span className="text-purple-400">from</span> <span className="text-amber-300">'to-await-fetch'</span>;
-<span className="text-purple-400">import</span> {'{ Toast }'} <span className="text-purple-400">from</span> <span className="text-amber-300">'@/components/Toast'</span>;
-<br/>
-<span className="text-purple-400">export const</span> http = <span className="text-sky-300">createToAwaitFetch</span>({'{'}
-  <span className="text-slate-500">// 基础配置</span>
-  baseURL: <span className="text-amber-300">'https://api.demo.com'</span>,
-  timeout: <span className="text-teal-300">10000</span>,
-<br/>
-  <span className="text-slate-500">// 动态设置请求头</span>
-  <span className="text-cyan-300">headers</span>: () =&gt; {'{'}
-    <span className="text-purple-400">const</span> token = localStorage.getItem(<span className="text-amber-300">'token'</span>);
-    <span className="text-purple-400">return</span> token ? {'{'} <span className="text-green-400">'Authorization'</span>: <span className="text-amber-300">`Bearer ${'{token}'}`</span> {'}'} : {'{}'};
-  {'}'},
-<br/>
-  <span className="text-slate-500">// 业务错误处理器 code !== 0</span>
-  <span className="text-cyan-300">onBusinessError</span>: (res, <span className="text-orange-300">suppress</span>) =&gt; {'{'}
-    <span className="text-purple-400">if</span> (res.code === <span className="text-teal-300">401</span>) {'{'}
-      <span className="text-orange-300">suppress</span>(); <span className="text-slate-500">// 静默处理，不弹窗</span>
-      router.push(<span className="text-amber-300">'/login'</span>);
-    {'}'} <span className="text-purple-400">else</span> {'{'}
-      Toast.show(res.message);
-    {'}'}
-  {'}'},
-<br/>
-  <span className="text-slate-500">// 网络/HTTP错误处理器</span>
-  <span className="text-cyan-300">onNetworkError</span>: (err) =&gt; {'{'}
-     Toast.show(<span className="text-amber-300">'网络开小差了'</span>);
-  {'}'},
-<br/>
-  <span className="text-slate-500">// 自动重试</span>
-  <span className="text-cyan-300">retry</span>: {'{'}
-    retries: <span className="text-teal-300">3</span>,
-    shouldRetry: (err) =&gt; err.response?.status &gt;= <span className="text-teal-300">500</span>
-  {'}'}
-{'}'});
-</code>
+               <pre className="font-mono text-sm leading-relaxed text-slate-300 whitespace-pre">
+                 <span className="text-purple-400">import</span> {'{ createToAwaitFetch }'} <span className="text-purple-400">from</span> <span className="text-amber-300">'to-await-fetch'</span>;{'\n'}
+                 <span className="text-purple-400">import</span> {'{ Toast }'} <span className="text-purple-400">from</span> <span className="text-amber-300">'@/components/Toast'</span>;{'\n'}
+                 {'\n'}
+                 <span className="text-purple-400">export const</span> http = <span className="text-sky-300">createToAwaitFetch</span>({'{'}{'\n'}
+                 {'  '}<span className="text-slate-500">// 基础配置</span>{'\n'}
+                 {'  '}baseURL: <span className="text-amber-300">'https://api.demo.com'</span>,{'\n'}
+                 {'  '}timeout: <span className="text-teal-300">10000</span>,{'\n'}
+                 {'\n'}
+                 {'  '}<span className="text-slate-500">// 动态设置请求头</span>{'\n'}
+                 {'  '}<span className="text-cyan-300">headers</span>: () =&gt; {'{'}{'\n'}
+                 {'    '}<span className="text-purple-400">const</span> token = localStorage.getItem(<span className="text-amber-300">'token'</span>);{'\n'}
+                 {'    '}<span className="text-purple-400">return</span> token ? {'{'} <span className="text-green-400">'Authorization'</span>: <span className="text-amber-300">{"`Bearer ${token}`"}</span> {'}'} : {'{}'};{'\n'}
+                 {'  '}{'}'},{'\n'}
+                 {'\n'}
+                 {'  '}<span className="text-slate-500">// 业务错误处理器 code !== 0</span>{'\n'}
+                 {'  '}<span className="text-cyan-300">onBusinessError</span>: (res, <span className="text-orange-300">suppress</span>) =&gt; {'{'}{'\n'}
+                 {'    '}<span className="text-purple-400">if</span> (res.code === <span className="text-teal-300">401</span>) {'{'}{'\n'}
+                 {'      '}router.push(<span className="text-amber-300">'/login'</span>);{'\n'}
+                 {'      '}<span className="text-orange-300">suppress</span>(); <span className="text-slate-500">// 抑制报错，业务侧不用处理</span>{'\n'}
+                 {'    '}{'}'} <span className="text-purple-400">else</span> {'{'}{'\n'}
+                 {'      '}Toast.show(res.message);{'\n'}
+                 {'    '}{'}'}{'\n'}
+                 {'  '}{'}'},{'\n'}
+                 {'\n'}
+                 {'  '}<span className="text-slate-500">// 网络/HTTP错误处理器</span>{'\n'}
+                 {'  '}<span className="text-cyan-300">onNetworkError</span>: (err) =&gt; {'{'}{'\n'}
+                 {'     '}Toast.show(<span className="text-amber-300">'网络开小差了'</span>);{'\n'}
+                 {'  '}{'}'},{'\n'}
+                 {'\n'}
+                 {'  '}<span className="text-slate-500">// 自动重试</span>{'\n'}
+                 {'  '}<span className="text-cyan-300">retry</span>: {'{'}{'\n'}
+                 {'    '}retries: <span className="text-teal-300">3</span>,{'\n'}
+                 {'    '}shouldRetry: (err) =&gt; err.response?.status &gt;= <span className="text-teal-300">500</span>{'\n'}
+                 {'  '}{'}'}{'\n'}
+                 {'}'});
                </pre>
              </div>
            </div>
@@ -88,20 +86,18 @@ export default function BestPractices() {
               <div className="bg-surface-dark border border-white/10 rounded-xl overflow-hidden flex-1">
                 <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-xs text-slate-400 font-mono">src/api/user.ts</div>
                 <div className="p-6">
-<pre className="font-mono text-sm leading-relaxed text-slate-300">
-<code className="block">
-<span className="text-purple-400">import</span> {'{ http }'} <span className="text-purple-400">from</span> <span className="text-amber-300">'@/utils/http'</span>;
-<br/>
-<span className="text-purple-400">export async function</span> <span className="text-sky-300">getUserInfo</span>(userId) {'{'}
-  <span className="text-slate-500">// 自动应用全局配置</span>
-  <span className="text-purple-400">const</span> [err, data] = <span className="text-purple-400">await</span> http.<span className="text-sky-300">sendGet</span>(
-    <span className="text-amber-300">`/users/${'{userId}'}`</span>
-  );
-  <span className="text-purple-400">if</span> (err) <span className="text-purple-400">return</span> <span className="text-teal-300">null</span>;
-  <span className="text-purple-400">return</span> data;
-{'}'}
-</code>
-</pre>
+                  <pre className="font-mono text-sm leading-relaxed text-slate-300 whitespace-pre">
+                    <span className="text-purple-400">import</span> {'{ http }'} <span className="text-purple-400">from</span> <span className="text-amber-300">'@/utils/http'</span>;{'\n'}
+                    {'\n'}
+                    <span className="text-purple-400">export async function</span> <span className="text-sky-300">getUserInfo</span>(userId) {'{'}{'\n'}
+                    {'  '}<span className="text-slate-500">// 自动应用全局配置</span>{'\n'}
+                    {'  '}<span className="text-purple-400">const</span> [err, data] = <span className="text-purple-400">await</span> http.<span className="text-sky-300">sendGet</span>({'\n'}
+                    {'    '}<span className="text-amber-300">{"`/users/${'{'}`"}userId{'}'}`</span>{'\n'}
+                    {'  '});{'\n'}
+                    {'  '}<span className="text-purple-400">if</span> (err) <span className="text-purple-400">return</span> <span className="text-teal-300">null</span>;{'\n'}
+                    {'  '}<span className="text-purple-400">return</span> data;{'\n'}
+                    {'}'}
+                  </pre>
                 </div>
               </div>
             </div>
@@ -131,21 +127,19 @@ export default function BestPractices() {
               <div className="bg-surface-dark border border-white/10 rounded-xl overflow-hidden flex-1">
                 <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-xs text-slate-400 font-mono">src/api/upload.ts</div>
                 <div className="p-6">
-<pre className="font-mono text-sm leading-relaxed text-slate-300">
-<code className="block">
-<span className="text-purple-400">export function</span> <span className="text-sky-300">uploadAvatar</span>(file, uid) {'{'}
-  <span className="text-purple-400">return</span> http.<span className="text-sky-300">sendPostForm</span>(
-    <span className="text-amber-300">`/users/${'{uid}'}/avatar`</span>,
-    {'{'}
-      <span className="text-slate-500">// file字段自动作为文件处理</span>
-      file: file,
-      <span className="text-slate-500">// 其他字段作为文本</span>
-      type: <span className="text-amber-300">'avatar'</span>
-    {'}'}
-  );
-{'}'}
-</code>
-</pre>
+                  <pre className="font-mono text-sm leading-relaxed text-slate-300 whitespace-pre">
+                    <span className="text-purple-400">export function</span> <span className="text-sky-300">uploadAvatar</span>(file, uid) {'{'}{'\n'}
+                    {'  '}<span className="text-purple-400">return</span> http.<span className="text-sky-300">sendPostForm</span>({'\n'}
+                    {'    '}<span className="text-amber-300">{"`/users/${'{'}`"}uid{'}'}/avatar`</span>,{'\n'}
+                    {'    '}{'{'}{'\n'}
+                    {'      '}<span className="text-slate-500">// file字段自动作为文件处理</span>{'\n'}
+                    {'      '}file: file,{'\n'}
+                    {'      '}<span className="text-slate-500">// 其他字段作为文本</span>{'\n'}
+                    {'      '}type: <span className="text-amber-300">'avatar'</span>{'\n'}
+                    {'    '}{'}'}{'\n'}
+                    {'  '});{'\n'}
+                    {'}'}
+                  </pre>
                 </div>
               </div>
             </div>
@@ -175,22 +169,20 @@ export default function BestPractices() {
               <div className="bg-surface-dark border border-white/10 rounded-xl overflow-hidden flex-1">
                 <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-xs text-slate-400 font-mono">src/api/download.ts</div>
                 <div className="p-6">
-<pre className="font-mono text-sm leading-relaxed text-slate-300">
-<code className="block">
-<span className="text-purple-400">export async function</span> <span className="text-sky-300">downloadFile</span>(id) {'{'}
-  <span className="text-purple-400">const</span> [err, blob] = <span className="text-purple-400">await</span> http.<span className="text-sky-300">sendGetBlob</span>(
-    <span className="text-amber-300">`/files/${'{id}'}/download`</span>
-  );
-  <span className="text-purple-400">if</span> (blob) {'{'}
-    <span className="text-purple-400">const</span> url = URL.<span className="text-sky-300">createObjectURL</span>(blob);
-    <span className="text-purple-400">const</span> a = document.createElement(<span className="text-amber-300">'a'</span>);
-    a.href = url;
-    a.download = <span className="text-amber-300">'file.ext'</span>;
-    a.click();
-  {'}'}
-{'}'}
-</code>
-</pre>
+                  <pre className="font-mono text-sm leading-relaxed text-slate-300 whitespace-pre">
+                    <span className="text-purple-400">export async function</span> <span className="text-sky-300">downloadFile</span>(id) {'{'}{'\n'}
+                    {'  '}<span className="text-purple-400">const</span> [err, blob] = <span className="text-purple-400">await</span> http.<span className="text-sky-300">sendGetBlob</span>({'\n'}
+                    {'    '}<span className="text-amber-300">{"`/files/${'{'}`"}id{'}'}/download`</span>{'\n'}
+                    {'  '});{'\n'}
+                    {'  '}<span className="text-purple-400">if</span> (blob) {'{'}{'\n'}
+                    {'    '}<span className="text-purple-400">const</span> url = URL.<span className="text-sky-300">createObjectURL</span>(blob);{'\n'}
+                    {'    '}<span className="text-purple-400">const</span> a = document.createElement(<span className="text-amber-300">'a'</span>);{'\n'}
+                    {'    '}a.href = url;{'\n'}
+                    {'    '}a.download = <span className="text-amber-300">'file.ext'</span>;{'\n'}
+                    {'    '}a.click();{'\n'}
+                    {'  '}{'}'}{'\n'}
+                    {'}'}
+                  </pre>
                 </div>
               </div>
             </div>

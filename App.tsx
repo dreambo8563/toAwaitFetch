@@ -4,9 +4,11 @@ import Home from './pages/Home';
 import Configuration from './pages/Configuration';
 import BestPractices from './pages/BestPractices';
 import ErrorHandling from './pages/ErrorHandling';
+import SearchBox from './components/SearchBox';
 
 const Navbar = () => {
   const location = useLocation();
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = React.useState(false);
   const isActive = (path: string) => location.pathname === path;
 
   return (
@@ -31,12 +33,37 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-           <div className="relative hidden sm:block">
-            <span className="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-            <input className="w-40 rounded-md border-0 bg-white/10 py-2 pl-10 pr-4 text-sm text-white placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary" placeholder="搜索..." type="search"/>
-          </div>
+          {/* 桌面端搜索 */}
+          <SearchBox className="hidden sm:block" />
+          
+          {/* 移动端搜索按钮 */}
+          <button
+            onClick={() => setIsMobileSearchOpen(true)}
+            className="sm:hidden p-2 text-slate-400 hover:text-white transition-colors"
+            aria-label="搜索"
+          >
+            <span className="material-symbols-outlined text-xl">search</span>
+          </button>
         </div>
       </nav>
+      
+      {/* 移动端搜索覆盖层 */}
+      {isMobileSearchOpen && (
+        <div className="fixed inset-0 z-50 bg-background-dark/95 backdrop-blur-sm sm:hidden">
+          <div className="flex items-center gap-4 p-4 border-b border-white/10">
+            <button
+              onClick={() => setIsMobileSearchOpen(false)}
+              className="p-2 text-slate-400 hover:text-white transition-colors"
+            >
+              <span className="material-symbols-outlined text-xl">arrow_back</span>
+            </button>
+            <SearchBox className="flex-1" />
+          </div>
+          <div className="p-4 text-center text-slate-400 text-sm">
+            <p>使用 Ctrl+K 或 / 键快速搜索</p>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

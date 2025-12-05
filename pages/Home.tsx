@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
@@ -57,35 +57,35 @@ export default function Home() {
                  </button>
                </div>
                <pre className="font-mono text-sm leading-relaxed text-slate-300">
-                 {demoMode === 'chaining' ? (
-<code className="block">
-<span className="text-purple-400">import</span> toAwaitFetch <span className="text-purple-400">from</span> <span className="text-amber-300">'to-await-fetch'</span>;
-<br/>
-toAwaitFetch(<span className="text-amber-300">'https://api.example.com/data'</span>)
-  .<span className="text-sky-300">then</span>(({`{ data, error }`}) =&gt; {'{'}
-    <span className="text-purple-400">if</span> (error) {'{'}
-      console.<span className="text-sky-300">error</span>(error.message);
-      <span className="text-purple-400">return</span>;
-    {'}'}
-    console.<span className="text-sky-300">log</span>(data);
-  {'}'});
-</code>
-                 ) : (
-<code className="block">
-<span className="text-purple-400">import</span> toAwaitFetch <span className="text-purple-400">from</span> <span className="text-amber-300">'to-await-fetch'</span>;
-<br/>
-<span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch(
-  <span className="text-amber-300">'https://api.example.com/data'</span>
-);
-<br/>
-<span className="text-purple-400">if</span> (error) {'{'}
-  console.<span className="text-sky-300">error</span>(error.message);
-  <span className="text-purple-400">return</span>;
-{'}'}
-console.<span className="text-sky-300">log</span>(data);
-</code>
-                 )}
-               </pre>
+                {demoMode === 'chaining' ? (
+                  <code className="block whitespace-pre">
+                    <span className="text-purple-400">import</span> toAwaitFetch <span className="text-purple-400">from</span> <span className="text-amber-300">'to-await-fetch'</span>;{'\n'}
+                    {'\n'}
+                    toAwaitFetch(<span className="text-amber-300">'https://api.example.com/data'</span>){'\n'}
+                    {'  '}.<span className="text-sky-300">then</span>({'({ data, error })'} =&gt; {'{'}{'\n'}
+                    {'    '}<span className="text-purple-400">if</span> (error) {'{'}{'\n'}
+                    {'      '}console.<span className="text-sky-300">error</span>(error.message);{'\n'}
+                    {'      '}<span className="text-purple-400">return</span>;{'\n'}
+                    {'    '}{'}'}{'\n'}
+                    {'    '}console.<span className="text-sky-300">log</span>(data);{'\n'}
+                    {'  '}{'}'});
+                  </code>
+                ) : (
+                  <code className="block whitespace-pre">
+                    <span className="text-purple-400">import</span> toAwaitFetch <span className="text-purple-400">from</span> <span className="text-amber-300">'to-await-fetch'</span>;{'\n'}
+                    {'\n'}
+                    <span className="text-purple-400">const</span> {'{ data, error }'} = <span className="text-purple-400">await</span> toAwaitFetch({'\n'}
+                    {'  '}<span className="text-amber-300">'https://api.example.com/data'</span>{'\n'}
+                    );{'\n'}
+                    {'\n'}
+                    <span className="text-purple-400">if</span> (error) {'{'}{'\n'}
+                    {'  '}console.<span className="text-sky-300">error</span>(error.message);{'\n'}
+                    {'  '}<span className="text-purple-400">return</span>;{'\n'}
+                    {'}'}{'\n'}
+                    console.<span className="text-sky-300">log</span>(data);
+                  </code>
+                )}
+              </pre>
             </div>
 
             {/* Animation Output */}
